@@ -120,11 +120,13 @@ void treeADC() {
       else q0 = e*ADCgain; //charged particle
 
       //resolution
-      q0 = gr->Gaus(q0,q0*QRes/2.35);
+      //q0 = gr->Gaus(q0,q0*QRes/2.35);
 
       //light transmission within the plastic
       qu = q0*TMath::Exp(-(L-x)/Lambda);
       qd = q0*TMath::Exp(-(L+x)/Lambda);
+      qu = gr->Gaus(qu,qu*QRes/2.35);
+      qd = gr->Gaus(qd,qd*QRes/2.35);
 
       //threshold of time of tu and td
       if(qu<100) tu = TDCoverflow;
